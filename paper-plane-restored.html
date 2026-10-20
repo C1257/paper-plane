@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Paper Plane — a calm, premium magazine of ideas, technology and culture.">
+<meta name="theme-color" content="#0B1220">
+<meta http-equiv="Cache-Control" content="no-store">
+<meta http-equiv="Pragma" content="no-cache">
+<link rel="preconnect" href="https://hacker-news.firebaseio.com" crossorigin>
+<link rel="preconnect" href="https://hn.algolia.com" crossorigin>
+<link rel="preconnect" href="https://commons.wikimedia.org" crossorigin>
+<link rel="dns-prefetch" href="//hn.algolia.com">
+<link rel="dns-prefetch" href="//commons.wikimedia.org">
+<title>Paper Plane — Ideas in Flight</title>
+<style>
+:root{
+  /* Paper Plane trust palette — preserve as the canonical brand system.
+     Trust blue #2563EB · Deep blue #1D4ED8 · Cyan #06B6D4
+     Deep navy #0F172A · Cool white #F8FAFC · White #FFFFFF · Slate #E2E8F0
+     Dark header/footer #0B1220 */
+  --bg:#F8FAFC;--surface:#FFFFFF;--surface2:#F1F5F9;--text:#0F172A;--muted:#475569;
+  --line:#E2E8F0;--brand:#2563EB;--brand-hover:#1D4ED8;--cyan:#06B6D4;--navy:#0B1220;--max:1180px;
+  --shadow:0 24px 70px rgba(15,23,42,.10);\n  /* Paper Plane canonical trust palette — preserve unless the owner explicitly requests a rebrand. */
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.7 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;z-index:-2;background:radial-gradient(circle at 78% 4%,rgba(37,99,235,.10),transparent 28%),radial-gradient(circle at 12% 35%,rgba(6,182,212,.06),transparent 30%),linear-gradient(180deg,#F8FAFC,#F8FAFC 55%,#EEF2F7)}
+body:after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.18;background-image:linear-gradient(rgba(15,23,42,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(15,23,42,.035) 1px,transparent 1px);background-size:56px 56px;mask-image:linear-gradient(#000,transparent 80%)}
+::selection{background:rgba(37,99,235,.18);color:#0F172A}
+button,a,input{font:inherit}
+a{color:inherit}
+button{appearance:none;-webkit-appearance:none;border:0}
+button:focus{outline:0}button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--brand);outline-offset:3px}
+.wrap{width:min(var(--max),calc(100% - 40px));margin:auto}
+.progress{position:fixed;top:0;left:0;height:2px;width:0;background:var(--brand);z-index:100;box-shadow:0 0 18px rgba(37,99,235,.25)}
+.topline{height:34px;border-bottom:1px solid var(--line);display:flex;align-items:center;color:#64748B;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+.topline .wrap{display:flex;justify-content:space-between}
+header{position:sticky;top:0;z-index:50;background:rgba(11,18,32,.94);backdrop-filter:blur(22px);border-bottom:1px solid var(--line)}
+.nav{height:78px;display:flex;align-items:center;justify-content:space-between;gap:30px}
+.brand{text-decoration:none;font-size:20px;font-weight:850;letter-spacing:-.045em;color:#fff}.brand span{color:#60A5FA;font-weight:500}
+.navlinks{display:flex;align-items:center;gap:28px}.navlinks a{color:#CBD5E1;text-decoration:none;transition:color .25s}.navlinks a:hover{color:#fff}
+.search-wrap{position:relative;width:clamp(250px,25vw,320px);flex:0 0 auto}.search{display:block;width:100%;min-width:0;height:44px;border:1px solid #CBD5E1;background:#FFFFFF;color:#0F172A;padding:0 44px 0 16px;border-radius:10px;outline:none;line-height:normal;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:14px;box-shadow:0 1px 2px rgba(15,23,42,.05);transition:border-color .2s,box-shadow .2s}.search::placeholder{color:#64748B;opacity:1}.search:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(37,99,235,.12)}.search::-webkit-search-cancel-button{display:none}.search-clear{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:28px;height:28px;border-radius:7px;background:#F1F5F9;color:#475569;cursor:pointer;display:none;align-items:center;justify-content:center}.search-clear:hover{color:#0F172A;background:#E2E8F0}.search-clear.show{display:flex}.search-panel{position:absolute;top:calc(100% + 10px);left:0;right:0;background:#FFFFFF;border:1px solid #E2E8F0;border-radius:12px;box-shadow:0 22px 60px rgba(15,23,42,.16);padding:8px;display:none;z-index:90}.search-panel.show{display:block}.search-result{display:block;padding:10px;border-radius:8px;text-decoration:none;color:#0F172A}.search-result:hover,.search-result:focus{background:#F1F5F9;outline:0}.search-result-title{font-size:13px;line-height:1.35}.search-result-meta{margin-top:3px;color:#64748B;font-size:10px}.search-hint{padding:10px;color:#64748B;font-size:11px}
+.hero{padding:105px 0 78px;border-bottom:1px solid var(--line)}
+.kicker{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--brand);font-weight:800}
+.hero h1{font-family:Georgia,serif;font-weight:400;font-size:clamp(55px,9vw,110px);line-height:.91;letter-spacing:-.07em;max-width:900px;margin:18px 0 26px}
+.hero h1 em{font-style:italic;color:#334155}.hero p{max-width:650px;color:var(--muted);font-size:18px}
+.meta{margin-top:30px;display:flex;gap:14px;align-items:center;color:#64748B;font-size:12px}.dot{width:4px;height:4px;background:var(--brand);border-radius:50%}
+.tabs{position:sticky;top:78px;z-index:30;background:rgba(11,18,32,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--line)}
+.tabbar{display:flex;gap:8px;overflow:auto;padding:13px 0;scrollbar-width:none}.tabbar::-webkit-scrollbar{display:none}
+.tab{cursor:pointer;color:#858b98;background:transparent;padding:9px 15px;border-radius:6px;white-space:nowrap;transition:color .2s,background .2s,transform .2s}
+.tab:hover{color:#fff;background:#F1F5F9;transform:translateY(-1px)}
+.tab.active{color:#1D4ED8;background:rgba(37,99,235,.08);box-shadow:inset 0 -2px var(--brand)}
+.tab:active{background:transparent;transform:none}
+main section{padding:70px 0}.sectionhead{display:flex;justify-content:space-between;align-items:end;margin-bottom:26px;gap:20px}.sectionhead h2{font:400 32px/1 Georgia,serif;letter-spacing:-.04em;margin:0}.sectionhead p{color:#64748B;margin:0}
+.status{font-size:11px;color:#64748B;display:flex;align-items:center;gap:8px}.pulse{width:6px;height:6px;background:#79b889;border-radius:50%;box-shadow:0 0 0 5px rgba(121,184,137,.08);animation:pulse 2s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 9px rgba(121,184,137,0)}}
+.feature{display:grid;grid-template-columns:1.35fr .65fr;border:1px solid var(--line);background:linear-gradient(120deg,#FFFFFF,#F8FAFC);box-shadow:var(--shadow);border-radius:12px;overflow:hidden}
+.feature-main{padding:44px}.feature-side{border-left:1px solid var(--line);padding:32px;display:flex;flex-direction:column;justify-content:space-between}
+.label{font-size:10px;text-transform:uppercase;letter-spacing:.17em;color:var(--brand);font-weight:800}
+.feature h3{font:400 clamp(34px,5vw,58px)/.98 Georgia,serif;letter-spacing:-.055em;margin:15px 0}.feature p{color:var(--muted);max-width:650px}
+.link{display:inline-flex;align-items:center;gap:8px;color:#1D4ED8;text-decoration:none;margin-top:20px;font-weight:700}.link span{transition:transform .25s}.link:hover span{transform:translateX(4px)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:#FFFFFF;border:1px solid var(--line);border-radius:10px;padding:25px;min-height:270px;display:flex;flex-direction:column;transition:transform .3s,border-color .3s,background .3s}.card:hover{transform:translateY(-5px);border-color:rgba(37,99,235,.28);background:#FFFFFF}.card h3{font:400 25px/1.1 Georgia,serif;letter-spacing:-.035em;margin:12px 0}.card p{color:var(--muted);margin:0}.card .link{margin-top:auto}
+.fade{opacity:0;transform:translateY(14px);transition:opacity .6s,transform .6s}.fade.show{opacity:1;transform:none}
+.loading{height:180px;display:grid;place-items:center;color:#64748B}.spinner{width:22px;height:22px;border:1px solid rgba(255,255,255,.15);border-top-color:var(--brand);border-radius:50%;animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+.empty{padding:50px 20px;border:1px dashed var(--line);text-align:center;color:var(--muted);border-radius:10px}
+.about{display:grid;grid-template-columns:.7fr 1.3fr;gap:70px;border-top:1px solid var(--line)}.about h2{font:400 45px/.98 Georgia,serif;letter-spacing:-.055em;margin:0}.about p{color:var(--muted);font-size:16px}
+footer{padding:45px 0 65px;border-top:1px solid var(--line);color:#64748B;font-size:12px;display:flex;justify-content:space-between}
+@media(max-width:820px){.navlinks{display:none}.search-wrap{width:min(240px,42vw)}.search{width:100%}.feature,.about{grid-template-columns:1fr}.feature-side{border-left:0;border-top:1px solid var(--line)}.cards{grid-template-columns:1fr}.hero{padding-top:75px}.tabs{top:78px}}
+@media(max-width:520px){.wrap{width:min(var(--max),calc(100% - 28px))}.topline{font-size:9px}.topline .wrap span:last-child{display:none}.nav{gap:12px}.search-wrap{width:min(250px,52vw);max-width:52vw}.search{width:100%}.hero h1{font-size:57px}.feature-main{padding:28px}.feature-side{padding:25px}footer{display:block}.footer-right{margin-top:10px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.fade{opacity:1;transform:none}}
+
+.live-request{font-variant-numeric:tabular-nums;color:#64748B}.tab.is-loading{pointer-events:none;opacity:.65}.live-block{min-height:180px;display:grid;place-items:center;padding:28px;text-align:center}.live-block strong{display:block;color:#0F172A;margin-bottom:6px}.live-block span{display:block;color:#64748B;font-size:12px}.request-id{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;color:#64748B;margin-top:8px}.media-shell{margin-top:34px}
+.media-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.media-card{background:linear-gradient(180deg,#F1F5F9,rgba(255,255,255,.018));border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+.media-card:hover{transform:translateY(-3px);border-color:rgba(37,99,235,.28);box-shadow:0 18px 45px rgba(0,0,0,.24)}
+.media-thumb{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;background:#0c0e13}
+.media-body{padding:16px}
+.media-type{font:700 10px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.13em;text-transform:uppercase;color:var(--brand)}
+.media-title{margin:8px 0 10px;font-size:18px;line-height:1.22}
+.media-credit{margin:0;color:var(--muted);font-size:12px;line-height:1.5}
+.media-actions{display:flex;gap:10px;margin-top:13px;align-items:center}
+.media-actions a{color:var(--text);font-size:12px;text-decoration:none;border-bottom:1px solid rgba(215,183,122,.35);padding-bottom:3px}
+.media-actions a:hover{border-color:var(--brand)}
+.media-audio{width:100%;margin-top:10px}
+.truth-note{margin-top:14px;padding:12px 14px;border-left:2px solid var(--brand);background:rgba(37,99,235,.05);color:var(--muted);font-size:12px;line-height:1.55}
+@media(max-width:900px){.media-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.media-grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.media-card{transition:none}.media-card:hover{transform:none}}
+
+.internet-overlay{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:24px;background:rgba(11,18,32,.94);backdrop-filter:blur(10px)}
+.internet-overlay[hidden]{display:none}
+.internet-panel{width:min(560px,100%);padding:38px;border:1px solid #E2E8F0;border-radius:24px;background:#F8FAFC;color:#0F172A;box-shadow:0 30px 100px rgba(0,0,0,.28);text-align:center}
+.internet-panel h2{margin:10px 0 12px;font-size:clamp(28px,5vw,46px);line-height:1.05}
+.internet-panel p{margin:0 auto 24px;max-width:44ch;color:#475569;line-height:1.65}
+.retry{appearance:none;border:0;border-radius:999px;background:#2563EB;color:#fff;padding:12px 20px;font:inherit;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(37,99,235,.22)}
+.retry:hover{background:#1D4ED8}
+.retry:focus-visible{outline:3px solid #06B6D4;outline-offset:3px}
+</style>
+</head>
+<body>
+<div class="progress"></div>
+<div class="topline"><div class="wrap"><span>Paper Plane · Independent journal</span><span id="date">Loading the edition…</span></div></div>
+<header><div class="wrap"><nav class="nav"><a class="brand" href="#">Paper <span>Plane</span></a><div class="navlinks"><a href="#latest">Latest</a><a href="#journal">Journal</a><a href="#media">Media</a><a href="#about">About</a></div><div class="search-wrap"><input id="search" class="search" type="search" placeholder="Search live stories" aria-label="Search the live web" autocomplete="off" spellcheck="false"><button id="searchClear" class="search-clear" type="button" aria-label="Clear search">×</button><div id="searchPanel" class="search-panel" role="listbox" aria-label="Search results"></div></div></nav></div></header>
+<div class="tabs"><div class="wrap"><div class="tabbar" role="tablist" aria-label="Story sections">
+<button class="tab active" role="tab" aria-selected="true" data-feed="top">Latest</button>
+<button class="tab" role="tab" aria-selected="false" data-feed="new">New</button>
+<button class="tab" role="tab" aria-selected="false" data-feed="best">Best</button>
+<button class="tab" role="tab" aria-selected="false" data-feed="tech">Tech</button>
+<button class="tab" role="tab" aria-selected="false" data-feed="science">Science</button>
+<button class="tab" role="tab" aria-selected="false" data-feed="media">Media</button>
+</div></div></div>
+<main class="wrap">
+<section class="hero"><div class="kicker">Ideas in flight · live edition</div><h1>A quieter place for <em>interesting</em> things.</h1><p>Essays, discoveries and links gathered from the live web — presented with enough space to actually think.</p><div class="meta"><span class="pulse"></span><span id="live">Refreshing live sources</span><span class="dot"></span><span id="count">— stories</span></div></section>
+
+<section id="latest"><div class="sectionhead"><div><div class="kicker">The live desk</div><h2 id="feedTitle">Latest from the web</h2></div><div class="status" id="status">Connecting…</div></div><div id="feed" aria-live="polite"></div></section>
+
+
+<section id="media" class="media-shell">
+ <div class="sectionhead">
+  <div><div class="kicker">Open media</div><h2>Images, motion & sound</h2></div>
+  <div class="status" id="mediaStatus">Ready when needed</div>
+ </div>
+ <div class="truth-note">Media comes from Wikimedia Commons. Paper Plane does not present a media item as evidence for a news claim; every item keeps its source link and file information visible.</div>
+ <div id="mediaGrid" class="media-grid" aria-live="polite"></div>
+</section>
+
+<section id="journal"><div class="sectionhead"><div><div class="kicker">Trust protocol</div><h2>Live data, visible evidence.</h2></div></div><div class="feature fade"><div class="feature-main"><div class="label">How Paper Plane works</div><h3>No stored stories. No pretend-live mode.</h3><p>The story area is intentionally empty in the HTML. Every story shown there must arrive from a network request made by your browser. If that request fails, Paper Plane removes the results and shows the connection screen.</p><a class="link" href="#latest">Return to the live desk <span>→</span></a></div><div class="feature-side"><div><div class="label">Evidence rule</div><p>Source, timestamp and original link stay attached to every live result. Repeated stories can happen when the live source itself has not changed; they are never substituted from a local archive.</p></div><div class="label">Live-only mode</div></div></div></section>
+
+<section id="about" class="about fade"><div><div class="kicker">About</div><h2>Internet first. Offline never.</h2></div><div><p>Paper Plane is a browser-based live reader. It does not ship a news database, story fixtures, or offline story cache with the site.</p><p>A fresh request is made on every page load, every tab change, every search, after reconnecting, and during scheduled live refreshes. If a live source cannot be reached, the site says so instead of presenting old content as current.</p></div></section>
+
+<div id="internetOverlay" class="internet-overlay" hidden role="alertdialog" aria-modal="true" aria-labelledby="internetTitle">
+  <div class="internet-panel">
+    <div class="kicker">LIVE CONNECTION REQUIRED</div>
+    <h2 id="internetTitle">Unable to connect to the internet</h2>
+    <p>Paper Plane does not have offline news stored on this device. Reconnect to the internet and try again.</p>
+    <button id="retryLive" class="retry" type="button">Try again</button>
+  </div>
+</div>
+</main>
+<footer class="wrap"><span>© 2026 Paper Plane</span><span class="footer-right">Live content · Public web sources</span></footer>
+<script>
+/* PAPER PLANE — LIVE-ONLY CONTENT ENGINE
+   This page contains no story fixtures and no story cache.
+   A story is rendered only after a successful network response from a live source.
+*/
+const API='https://hn.algolia.com/api/v1/';
+const HN='https://hacker-news.firebaseio.com/v0/';
+const COMMONS='https://commons.wikimedia.org/w/api.php';
+const REQUEST_TIMEOUT=4500;
+const MEDIA_TIMEOUT=6000;
+const SEARCH_DEBOUNCE=350;
+const REFRESH_MS=120000;
+const $=id=>document.getElementById(id);
+const els={feed:$('feed'),count:$('count'),status:$('status'),live:$('live'),title:$('feedTitle'),mediaGrid:$('mediaGrid'),mediaStatus:$('mediaStatus'),overlay:$('internetOverlay'),retry:$('retryLive'),search:$('search'),panel:$('searchPanel'),clear:$('searchClear')};
+let state={feed:'top',query:''};
+let requestSerial=0, searchSerial=0, mediaSerial=0, searchTimer=null;
+let lastOnline=true;
+function host(u){try{return new URL(u).hostname.replace(/^www\./,'')}catch{return 'source'}}
+function ago(iso){if(!iso)return '—';const sec=Math.max(0,Math.floor((Date.now()-new Date(iso))/1000));if(sec<60)return `${sec}s ago`;if(sec<3600)return `${Math.floor(sec/60)}m ago`;if(sec<86400)return `${Math.floor(sec/3600)}h ago`;return `${Math.floor(sec/86400)}d ago`}
+function safeText(v){return String(v??'').replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]))}
+function safeUrl(v){try{const u=new URL(v);return /^https?:$/.test(u.protocol)?u.href:'#'}catch{return '#'}}
+function liveUrl(url){const u=new URL(url);u.searchParams.set('_pp_live',`${Date.now()}-${++requestSerial}`);return u.href}
+function showInternetError(){els.overlay.hidden=false;document.body.classList.add('internet-blocked')}
+function hideInternetError(){els.overlay.hidden=true;document.body.classList.remove('internet-blocked')}
+function clearStoryArea(message='Waiting for live data…'){els.feed.innerHTML=message?`<div class="live-block"><div><strong>${safeText(message)}</strong><span>No previously downloaded stories are stored or displayed.</span></div></div>`:'';els.count.textContent='0 live stories'}
+function setTabsBusy(busy){document.querySelectorAll('.tab').forEach(t=>{t.classList.toggle('is-loading',busy);t.setAttribute('aria-busy',busy?'true':'false')})}
+function sourceTimestamp(){return new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit',second:'2-digit'})}
+async function fetchLive(url,timeout=REQUEST_TIMEOUT,signal){
+ if(!navigator.onLine) throw new Error('offline');
+ const controller=new AbortController();
+ const timer=setTimeout(()=>controller.abort(),timeout);
+ if(signal) signal.addEventListener('abort',()=>controller.abort(),{once:true});
+ try{
+   const r=await fetch(liveUrl(url),{method:'GET',cache:'no-store',credentials:'omit',mode:'cors',redirect:'follow',signal:controller.signal,headers:{Accept:'application/json','Cache-Control':'no-cache'}});
+   if(!r.ok) throw new Error(`HTTP ${r.status}`);
+   const text=await r.text();
+   if(!text.trim()) throw new Error('empty-response');
+   return JSON.parse(text);
+ }finally{clearTimeout(timer)}
+}
+async function officialStories(kind,serial){
+ const endpoint=kind==='new'?'newstories':kind==='best'?'beststories':'newstories';
+ const ids=await fetchLive(HN+endpoint+'.json');
+ if(serial!==requestSerial) throw new Error('superseded');
+ const selected=(ids||[]).slice(0,24);
+ const results=await Promise.all(selected.map(id=>fetchLive(HN+'item/'+id+'.json').catch(()=>null)));
+ if(serial!==requestSerial) throw new Error('superseded');
+ return results.filter(x=>x&&x.type==='story'&&!x.deleted&&!x.dead&&x.title&&x.url).slice(0,12).map(x=>({title:x.title,url:x.url,points:x.score,created_at:new Date(x.time*1000).toISOString(),domain:host(x.url)}));
+}
+async function algoliaStories(kind,serial){
+ const since=Math.floor(Date.now()/1000)-12*60*60;
+ let q=kind==='tech'?'technology':kind==='science'?'science':'';
+ const endpoint=q?`search_by_date?tags=story&query=${encodeURIComponent(q)}&numericFilters=created_at_i>${since}&hitsPerPage=18`:`search_by_date?tags=story&numericFilters=created_at_i>${since}&hitsPerPage=18`;
+ const data=await fetchLive(API+endpoint);
+ if(serial!==requestSerial) throw new Error('superseded');
+ return (data.hits||[]).filter(x=>x.title&&x.url).map(x=>({title:x.title,url:x.url,points:x.points,created_at:x.created_at,domain:host(x.url)}));
+}
+function renderStories(items){
+ els.count.textContent=`${items.length} live ${items.length===1?'story':'stories'}`;
+ els.feed.innerHTML=items.length?items.map((x,i)=>`<article class="card fade show"><div class="card-no">${String(i+1).padStart(2,'0')}</div><div><div class="meta">${safeText(x.domain)} · ${ago(x.created_at)}${x.points!=null?` · ${x.points} points`:''}</div><h3>${safeText(x.title)}</h3><p class="byline">Fetched from the live source at ${safeText(sourceTimestamp())}</p><a class="read" href="${safeUrl(x.url)}" target="_blank" rel="noopener noreferrer">Read original ↗</a></div></article>`).join(''):`<div class="live-block"><div><strong>The live source returned no stories.</strong><span>Nothing from an older request is being substituted.</span></div></div>`;
+}
+async function load(feed='top'){
+ state.feed=feed;
+ const serial=++requestSerial;
+ if(feed==='media'){els.title.textContent='Open media';els.status.textContent='Connecting to live media…';els.live.textContent='Requesting fresh media from the internet';setTabsBusy(true);clearStoryArea('Loading live media…');try{await loadMedia(serial);hideInternetError()}catch(e){if(e.message!=='superseded'){showInternetError();els.status.textContent='Unable to connect to live media'}}finally{setTabsBusy(false)}return}
+ const names={top:'Latest from the web',new:'New stories from the web',best:'Best stories from the web',tech:'Latest technology stories',science:'Latest science stories'};
+ els.title.textContent=names[feed]||'Live stories';els.status.textContent='Connecting to live source…';els.live.textContent='Waiting for a fresh network response';clearStoryArea();setTabsBusy(true);
+ try{
+   const started=performance.now();
+   const items=(feed==='top'||feed==='new'||feed==='best')?await officialStories(feed,serial):await algoliaStories(feed,serial);
+   if(serial!==requestSerial) return;
+   renderStories(items);hideInternetError();els.status.innerHTML='<span class="pulse"></span> Live · fetched now';els.live.innerHTML=`Fresh response · ${Math.round(performance.now()-started)} ms · ${sourceTimestamp()} <span class="request-id">request ${serial}</span>`;
+ }catch(e){
+   if(e.message==='superseded')return;
+   clearStoryArea('Unable to connect to the internet.');els.status.textContent=e.name==='AbortError'?'Live source timed out':'Live source unavailable';els.live.textContent='No stored or fallback stories are displayed';showInternetError();
+ }finally{if(serial===requestSerial)setTabsBusy(false)}
+}
+function renderSearch(items,label){els.panel.innerHTML=items.length?items.slice(0,8).map(x=>`<a class="search-result" href="${safeUrl(x.url)}" target="_blank" rel="noopener noreferrer"><div class="search-result-title">${safeText(x.title)}</div><div class="search-result-meta">${safeText(x.domain)} · ${ago(x.created_at)}</div></a>`).join(''):`<div class="search-hint">${safeText(label)}</div>`;els.panel.classList.add('show')}
+async function liveSearch(q){const serial=++searchSerial;els.panel.innerHTML='<div class="search-hint">Searching the live source…</div>';els.panel.classList.add('show');try{const data=await fetchLive(API+'search_by_date?tags=story&query='+encodeURIComponent(q)+'&hitsPerPage=8');if(serial!==searchSerial)return;const items=(data.hits||[]).filter(x=>x.title&&x.url).map(x=>({title:x.title,url:x.url,created_at:x.created_at,domain:host(x.url)}));renderSearch(items,`No fresh live stories matched “${q}”.`)}catch(e){if(serial===searchSerial)renderSearch([],'Live search is unavailable because the internet source could not be reached.')}}
+function mediaQuery(){return ({top:'science technology',new:'science discovery',best:'space technology',tech:'technology computing',science:'science astronomy'}[state.feed]||'science technology')}
+async function loadMedia(parentSerial){const serial=++mediaSerial;const q=mediaQuery();els.mediaStatus.textContent='Connecting to live media…';els.mediaGrid.innerHTML='<div class="live-block"><div><strong>Loading fresh media…</strong><span>No stored media is displayed.</span></div></div>';const url=COMMONS+'?action=query&generator=search&gsrsearch='+encodeURIComponent(q)+'&gsrnamespace=6&gsrlimit=12&prop=imageinfo&iiprop=url|mime|extmetadata&iiurlwidth=720&format=json&origin=*';const data=await fetchLive(url,MEDIA_TIMEOUT);if(serial!==mediaSerial||parentSerial!==requestSerial)throw new Error('superseded');const pages=Object.values(data.query?.pages||{});const items=pages.map(p=>{const info=p.imageinfo?.[0]||{};return{title:p.title?.replace(/^File:/,''),url:info.url,thumb:info.thumburl||info.url,mime:info.mime,page:'https://commons.wikimedia.org/wiki/'+encodeURIComponent(p.title||'')}}).filter(x=>x.url&&x.mime&&(x.mime.startsWith('image/')||x.mime.startsWith('video/')||x.mime.startsWith('audio/')));if(!items.length)throw new Error('empty-media');els.mediaGrid.innerHTML=items.map(x=>`<article class="media-card"><img class="media-thumb" loading="lazy" decoding="async" src="${safeUrl(x.thumb)}" alt="${safeText(x.title)}"><div class="media-body"><div class="media-type">${safeText(x.mime)}</div><h3 class="media-title">${safeText(x.title)}</h3><p class="media-credit">Fresh Wikimedia Commons response · ${safeText(sourceTimestamp())}</p><div class="media-actions"><a href="${safeUrl(x.page)}" target="_blank" rel="noopener noreferrer">Source page ↗</a></div></div></article>`).join('');els.mediaStatus.textContent=`Live · ${items.length} fresh public items · ${sourceTimestamp()}`}
+
+document.querySelectorAll('.tab').forEach(tab=>tab.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(t=>{t.classList.remove('active');t.setAttribute('aria-selected','false')});tab.classList.add('active');tab.setAttribute('aria-selected','true');load(tab.dataset.feed)}));
+els.search.addEventListener('input',e=>{const q=e.target.value.trim();els.clear.classList.toggle('show',!!q);clearTimeout(searchTimer);if(!q){els.panel.classList.remove('show');return}searchTimer=setTimeout(()=>liveSearch(q),SEARCH_DEBOUNCE)});
+els.search.addEventListener('keydown',e=>{if(e.key==='Escape'){els.search.value='';els.clear.classList.remove('show');els.panel.classList.remove('show');els.search.blur()}if(e.key==='Enter'&&els.search.value.trim()){e.preventDefault();liveSearch(els.search.value.trim())}});
+els.clear.addEventListener('click',()=>{els.search.value='';els.clear.classList.remove('show');els.panel.classList.remove('show');els.search.focus()});document.addEventListener('click',e=>{if(!e.target.closest('.search-wrap'))els.panel.classList.remove('show')});els.retry.addEventListener('click',()=>load(state.feed));
+window.addEventListener('online',()=>{lastOnline=true;load(state.feed)});window.addEventListener('offline',()=>{lastOnline=false;clearStoryArea('Unable to connect to the internet.');els.status.textContent='Offline';els.live.textContent='No stored stories are displayed';showInternetError()});document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')load(state.feed)});setInterval(()=>{if(document.visibilityState==='visible')load(state.feed)},REFRESH_MS);
+$('date').textContent=new Intl.DateTimeFormat(undefined,{dateStyle:'long'}).format(new Date());document.querySelectorAll('.fade').forEach(x=>new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('show')),{threshold:.1}).observe(x));
+load('top');
+</script>
+</body>
+</html>
